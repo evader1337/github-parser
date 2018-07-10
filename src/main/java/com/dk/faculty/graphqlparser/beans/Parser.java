@@ -62,7 +62,7 @@ public class Parser {
         return schemaObject;
     }
 
-    public List<Operation> processFields(ArrayList fields) {
+    private List<Operation> processFields(ArrayList fields) {
         List<Operation> operations = new ArrayList<>();
         fields.stream().forEach(fieldObject -> {
             Map field = (Map) fieldObject;
@@ -86,7 +86,7 @@ public class Parser {
         return operations;
     }
 
-    public List<Argument> processArguments(ArrayList argumentsObject) {
+    private List<Argument> processArguments(ArrayList argumentsObject) {
         List<Argument> arguments = new ArrayList<>();
         argumentsObject.stream().forEach(argumentObject -> {
             Map argument = (Map) argumentObject;
@@ -104,7 +104,7 @@ public class Parser {
         return arguments;
     }
 
-    public String processType(Map typeMap) {
+    private String processType(Map typeMap) {
         if(typeMap.get("ofType") != null) {
             String type = processType((Map)typeMap.get("ofType"));
             if(typeMap.get("kind").equals("LIST")) {
@@ -119,7 +119,7 @@ public class Parser {
         }
     }
 
-    public CustomType processCustomType(Map type) {
+    private CustomType processCustomType(Map type) {
         CustomType customType = new CustomType();
         String[] invalidNames = {"String", "Int", "Boolean", "__Schema", "__Type", "__TypeKind", "__Field", "__InputValue", "__EnumValue", "__Directive", "__DirectiveLocation"};
         String name = (String) type.get("name");
@@ -156,7 +156,7 @@ public class Parser {
         }
     }
 
-    public List<EnumValue> processEnumValues(ArrayList values) {
+    private List<EnumValue> processEnumValues(ArrayList values) {
         List<EnumValue> enumValues = new ArrayList<>();
         values.stream().forEach(item -> {
             Map enumValueMap = (Map) item;
